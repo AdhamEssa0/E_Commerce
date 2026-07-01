@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace E_Commerce.Doman.Commen
 {
-    internal class BaseEntity
+    public abstract class BaseEntity<TKey>
     {
+        public TKey Id { get; set; } = default!;
     }
 }
