@@ -23,8 +23,6 @@ namespace E_Commerce.Application.Common
         public static Result Fail(IReadOnlyList<Error> errors)
             => new Result(false, errors );
 
-
-
     }
 
     public class Result<TValue> : Result
@@ -50,14 +48,5 @@ namespace E_Commerce.Application.Common
         public static Result<TValue> Fail(IReadOnlyList<Error> errors)
             => new Result<TValue>(errors);
 
-        internal static Result<IReadOnlyList<ProductDto>> OK(IReadOnlyList<ProductDto> productDtos)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static Result<ProductDto> Fail(Eroor eroor)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
