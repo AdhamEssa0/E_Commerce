@@ -1,4 +1,5 @@
-﻿using System;
+﻿using E_Commerce.Application.DTOs.ProductDtos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -49,7 +50,14 @@ namespace E_Commerce.Application.Common
         public static Result<TValue> Fail(IReadOnlyList<Error> errors)
             => new Result<TValue>(errors);
 
+        internal static Result<IReadOnlyList<ProductDto>> OK(IReadOnlyList<ProductDto> productDtos)
+        {
+            throw new NotImplementedException();
+        }
 
-
+        internal static Result<ProductDto> Fail(Eroor eroor)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

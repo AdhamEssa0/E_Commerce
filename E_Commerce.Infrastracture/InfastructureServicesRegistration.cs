@@ -1,6 +1,7 @@
 ﻿using E_Commerce.Doman.Contracts;
 using E_Commerce.Infrastracture.Data;
 using E_Commerce.Infrastracture.Data.DataSeeding;
+using E_Commerce.Infrastracture.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,7 +23,7 @@ namespace E_Commerce.Infrastracture
             });
 
             services.AddKeyedScoped<IDataSeeder, CatalogDataSeed>("Catalog");
-
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             return services;
         }
 
