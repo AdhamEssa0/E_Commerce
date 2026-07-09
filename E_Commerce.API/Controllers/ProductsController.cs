@@ -38,7 +38,7 @@ namespace E_Commerce.API.Controllers
         [HttpGet("brands")]
         public async Task<ActionResult<Result<IReadOnlyList<BrandDto>>>> GetAllBrands(CancellationToken ct = default!)
         {
-            var brands = _productService.GetAllBrandsAsync(ct);
+            var brands = await _productService.GetAllBrandsAsync(ct);
             return Ok(brands);
         } 
         
@@ -47,7 +47,7 @@ namespace E_Commerce.API.Controllers
         [HttpGet("types")]
         public async Task<ActionResult<Result<IReadOnlyList<TypeDto>>>> GetAllTypes(CancellationToken ct = default!)
         {
-            var types = _productService.GetAllTypeAsync(ct);
+            var types = await _productService.GetAllTypeAsync(ct);
             return Ok(types);
         }
 
