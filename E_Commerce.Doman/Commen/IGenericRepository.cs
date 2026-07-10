@@ -1,4 +1,5 @@
-﻿using System;
+﻿using E_Commerce.Doman.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,5 +14,6 @@ namespace E_Commerce.Doman.Commen
         void Remove(TEntity entity);
         Task<TEntity> GetByIdAsync(TKey id , CancellationToken ct = default);
         Task<IReadOnlyList<TEntity>> GetAllAsync(CancellationToken ct = default);
+        Task<IReadOnlyList<TEntity>> GetAllAsync(Ispecification<TEntity , TKey> spec , CancellationToken ct = default);
     }
 }
