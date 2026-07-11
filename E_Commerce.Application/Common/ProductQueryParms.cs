@@ -11,6 +11,7 @@ namespace E_Commerce.Application.Common
         public int? BarndId { get; set; }
         public int? TypeId { get; set; }
         public string? Searsh { get; set; }
+        public ProductSortObjects Sort { get; set; }
 
     }
 }

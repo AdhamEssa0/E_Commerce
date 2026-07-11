@@ -12,5 +12,8 @@ namespace E_Commerce.Doman.Contracts
     {
         ICollection<Expression<Func<TEntity , Object>>> InclodeExpression {  get;}
         Expression<Func<TEntity , bool>> Criteria {  get;}
+
+        Expression<Func<TEntity , Object>> OrderBy {  get;}
+        Expression<Func<TEntity , Object>> OrderByDescending { get;}
     }
 }
