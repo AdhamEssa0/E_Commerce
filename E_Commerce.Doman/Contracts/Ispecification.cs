@@ -11,5 +11,6 @@ namespace E_Commerce.Doman.Contracts
     public interface Ispecification<TEntity , TKey> where TEntity :  BaseEntity<TKey>
     {
         ICollection<Expression<Func<TEntity , Object>>> InclodeExpression {  get;}
+        Expression<Func<TEntity , bool>> Criteria {  get;}
     }
 }

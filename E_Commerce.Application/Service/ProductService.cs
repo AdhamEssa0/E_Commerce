@@ -42,9 +42,10 @@ namespace E_Commerce.Application.Service
             return Result<IReadOnlyList<TypeDto>>.Ok(types);
         }
 
-        public async Task<Result<ProductDto>> GetProductsAsync(int id, CancellationToken ct = default)
+        public async Task<Result<ProductDto>> GetProductByIdAsync(int id, CancellationToken ct = default)
         {
-            var product  = await _unitOfWork.GetRepository<Product , int>().GetByIdAsync(id , ct);
+            var Spec = new ProductWithBrandAndTypeSpec(id);
+            var product  = await _unitOfWork.GetRepository<Product , int>().GetByIdAsync(Spec, ct);
             if(product == null)
                 return Result<ProductDto>.Fail(Error.NotFound("Product.NotFound", $"Product With Id {id} Not Found"));
             return Result<ProductDto>.Ok(_mapper.Map<ProductDto>(product));

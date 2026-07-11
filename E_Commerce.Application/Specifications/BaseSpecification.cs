@@ -12,9 +12,16 @@ namespace E_Commerce.Application.Specifications
     public class BaseSpecification<TEntity, TKey> : Ispecification<TEntity, TKey> where TEntity : BaseEntity<TKey>
     {
         public ICollection<Expression<Func<TEntity, object>>> InclodeExpression { get; } = [];
+
+        public Expression<Func<TEntity, bool>> Criteria { get; private set; }
+
         protected void AddInclude(Expression<Func<TEntity, object>> include)
         {
             InclodeExpression.Add(include);
+        }
+        public BaseSpecification(Expression<Func<TEntity , bool>> criteria)
+        {
+            Criteria = criteria;
         }
     }
 }

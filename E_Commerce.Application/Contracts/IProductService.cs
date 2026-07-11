@@ -14,6 +14,6 @@ namespace E_Commerce.Application.Contracts
         Task<Result<IReadOnlyList<ProductDto>>> GetAllProductsAsync(CancellationToken ct = default);
         Task<Result<IReadOnlyList<TypeDto>>> GetAllTypeAsync(CancellationToken ct = default);
         Task<Result<IReadOnlyList<BrandDto>>> GetAllBrandsAsync(CancellationToken ct = default);
-        Task<Result<ProductDto>> GetProductsAsync(int id ,CancellationToken ct = default);
+        Task<Result<ProductDto>> GetProductByIdAsync(int id ,CancellationToken ct = default);
     }
 }
