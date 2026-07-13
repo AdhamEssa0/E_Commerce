@@ -38,6 +38,8 @@ namespace E_Commerce.Application
                     AddOrderBy(P => P.Id);
                     break;
             }
+            // Pagination
+            ApplyPagination(queryParams.PageSize, queryParams.PageIndex);
         }
         public ProductWithBrandAndTypeSpec(int id):base(P => P.Id == id)
         {

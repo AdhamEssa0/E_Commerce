@@ -13,5 +13,15 @@ namespace E_Commerce.Application.Common
         public string? Searsh { get; set; }
         public ProductSortObjects Sort { get; set; }
 
+        public int PageIndex { get; set; } = 1;
+        private const int MaxPageSize = 10;
+        private const int DefaultPageSize = 5;
+
+        private int pageSize;
+        public int PageSize
+        {
+            get => pageSize;
+            set => pageSize = value > MaxPageSize ? MaxPageSize : (value < 1 ? DefaultPageSize : value);
+        }
     }
 }
