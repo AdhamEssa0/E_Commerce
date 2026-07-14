@@ -16,5 +16,6 @@ namespace E_Commerce.Doman.Commen
         Task<TEntity?> GetByIdAsync(Ispecification<TEntity , TKey> Spec, CancellationToken ct = default);
         Task<IReadOnlyList<TEntity>> GetAllAsync(CancellationToken ct = default);
         Task<IReadOnlyList<TEntity>> GetAllAsync(Ispecification<TEntity , TKey> spec , CancellationToken ct = default);
+        Task<int> CountAsync(Ispecification<TEntity ,TKey > spec , CancellationToken ct = default);
     }
 }
