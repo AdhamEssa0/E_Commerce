@@ -1,10 +1,12 @@
-﻿using E_Commerce.Doman.Contracts;
+﻿using E_Commerce.Application.Contracts;
+using E_Commerce.Doman.Contracts;
 using E_Commerce.Infrastracture.Data;
 using E_Commerce.Infrastracture.Data.DataSeeding;
 using E_Commerce.Infrastracture.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +26,11 @@ namespace E_Commerce.Infrastracture
 
             services.AddKeyedScoped<IDataSeeder, CatalogDataSeed>("Catalog");
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddSingleton<IConnectionMultiplexer>(Config =>
+            {
+                return ConnectionMultiplexer.Connect(configration.GetConnectionString("RedisConnection")!   );
+            });
+            services.AddScoped<IBasketRepository, BasketRepository>();
             return services;
         }
 
