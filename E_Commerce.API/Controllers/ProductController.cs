@@ -7,5 +7,9 @@ namespace E_Commerce.API.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
+        // Get all Product
+        // Get by Id Product 
+        // Get all Brands
+        // Get produc type
     }
 }

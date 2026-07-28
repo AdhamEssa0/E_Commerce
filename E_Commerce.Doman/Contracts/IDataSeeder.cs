@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_Commerce.Doman.Commen
+namespace E_Commerce.Doman.Contracts
 {
-    public abstract class BaseEntity<TKey>
+    public interface IDataSeeder
     {
-        public TKey Id { get; set; } = default!;
+        Task SeedDataAsync(CancellationToken ct = default);
+
     }
 }

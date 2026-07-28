@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace E_Commerce.Doman.Entities
 {
-    internal class ProductTyps
+    public class CustomerBasket
     {
+        public string Id { get; set; }
+        public ICollection<BasketItem> Items { get; set; }
     }
 }

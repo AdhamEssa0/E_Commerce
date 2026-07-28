@@ -1,0 +1,58 @@
+﻿using AutoMapper;
+using E_Commerce.Application.Common;
+using E_Commerce.Application.Contracts;
+using E_Commerce.Application.DTOs.ProductDtos;
+using E_Commerce.Application.Specifications;
+using E_Commerce.Doman.Contracts;
+using E_Commerce.Doman.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace E_Commerce.Application.Service
+{
+    public class ProductService : IProductService
+    {
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
+
+        public ProductService(IUnitOfWork unitOfWork , IMapper mapper)
+        {
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+        }
+        public async Task<Result<IReadOnlyList<BrandDto>>> GetAllBrandsAsync(CancellationToken ct = default)
+        {
+            var brands  = await _unitOfWork.GetRepository<Brand , int>().GetAllAsync(ct);
+            var data = _mapper.Map<IReadOnlyList<BrandDto>>(brands);
+            return Result<IReadOnlyList<BrandDto>>.Ok(data);
+        }
+
+        public async Task<Result<PaginatedResult<ProductDto>>> GetAllProductsAsync(ProductQueryParms queryParams, CancellationToken ct = default)
+        {
+            var Spec = new ProductWithBrandAndTypeSpec(queryParams);
+            var products = await _unitOfWork.GetRepository<Product , int>().GetAllAsync(Spec , ct);
+            var data = _mapper.Map<IReadOnlyList<ProductDto>>(products);
+            var countSpec = new ProducrCountSpecification(queryParams);
+            var CountOfAllProduct = await _unitOfWork.GetRepository<Product , int>().CountAsync(countSpec);
+            var result = new PaginatedResult<ProductDto>(queryParams.PageIndex , queryParams.PageSize , CountOfAllProduct , data);
+            return Result<PaginatedResult<ProductDto>>.Ok(result);
+        }
+        public async Task<Result<IReadOnlyList<TypeDto>>> GetAllTypeAsync(CancellationToken ct = default)
+        {
+            var types = _mapper.Map<IReadOnlyList<TypeDto>>(await _unitOfWork.GetRepository<ProductType , int>().GetAllAsync(ct));
+            return Result<IReadOnlyList<TypeDto>>.Ok(types);
+        }
+
+        public async Task<Result<ProductDto>> GetProductByIdAsync(int id, CancellationToken ct = default)
+        {
+            var Spec = new ProductWithBrandAndTypeSpec(id);
+            var product  = await _unitOfWork.GetRepository<Product , int>().GetByIdAsync(Spec, ct);
+            if(product == null)
+                return Result<ProductDto>.Fail(Error.NotFound("Product.NotFound", $"Product With Id {id} Not Found"));
+            return Result<ProductDto>.Ok(_mapper.Map<ProductDto>(product));
+        }
+    }
+}
